@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Clock Out{% endblock %}
+
+{% block content %}
+
+<h1>Clock Out</h1>
+<div class="timer">
+    <label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
+</div>
+<script>
+    // Thanks to http://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+    // and http://stackoverflow.com/questions/1259219/django-datefield-to-unix-timestamp
+    var sec = Math.floor(new Date().getTime() / 1000) - {{ last_punch.time_in|date:"U" }};
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    setInterval( function(){
+        $("#seconds").html(pad(++sec % 60));
+        $("#minutes").html(pad(parseInt(sec/60,10) % 60));
+        $("#hours").html(pad(parseInt(sec / 60 / 60, 10)));
+    }, 1000);
+</script>
+<form action="." method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button class="btn btn-default">Clock Out!</button>
+</form>
+
+{% endblock %}
+
