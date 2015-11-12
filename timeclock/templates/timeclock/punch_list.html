@@ -2,19 +2,9 @@
 
 {% block title %}List of Punches by Date{% endblock %}
 
-{% block extrascripts %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css" type="text/css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-    $(function () {
-        $('input[type="date"]').datepicker();
-      });
-    </script>
-{% endblock %}
-
 {% block content %}
 
-<h1>View Punches by Date</h1>
+<h2>Filter Time Cards</h2>
 <form action="." method="GET">
   {% if request.user.is_superuser %}
   <select name="user">
@@ -30,37 +20,62 @@
       <option value="{{ project.id }}">{{ project.title }}</option>
     {% endfor %}
   </select>
+  <input type="date" name="start_date">
+  <input type="date" name="end_date">
+  <!--
   <input type="date" name="start_date" data-date-format="yyyy-m-dd">
   <input type="date" name="end_date" data-date-format="yyyy-m-dd">
+-->
   <input type="hidden" name="page" value="1">
   <button class="btn btn-default">Search</button>
 </form>
 
-{% for punch in punch_list %}
-    <p>{% if punch.user.first_name %} {{ punch.user.first_name}} {% else %} {{ punch.user.username }} {% endif %} | {{ punch.project.title }} | {{ punch.time_in }} | {{ punch.time_out }} | {{ punch.duration }} | {{ punch.note }} </p>
-{% empty %}
-    <p>The form above needs to be sumbited before any results will show.</p>
-{% endfor %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Project</th>
+            <th>Note</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for punch in punch_list %}
+        <tr>
+            <td>{% if punch.user.first_name %} {{ punch.user.first_name}} {% else %} {{ punch.user.username }} {% endif %}</td>
+            <td>{{ punch.project.title }}</td>
+            <td>{{ punch.note }}</td>
+            <td>{{ punch.time_in }}</td>
+            <td>{{ punch.time_out }}</td>
+            <td>{{ punch.duration }}</td>
+        </tr>
+      {% empty %}
+          <p>The form above needs to be sumbited before any results will show.</p>
+      {% endfor %}
+            </tbody>
+      </table>
 
-{% if punch_list %}
-  <p>Total Time: {{ total_time }}</p>
-{% endif %}
+      {% if punch_list %}
+        <p id="total">Total Time: {{ total_time }}</p>
+      {% endif %}
+
 <!-- Pagination goes here -->
   {% if is_paginated %}
       <div class="pagination">
           <span class="page-links">
               {% if page_obj.has_previous %}
-                  <a href="{{ request.get_full_path|slice:":-7" }}&page={{ page_obj.previous_page_number }}">previous</a>
+                  <a class="btn btn-pg previous" href="{{ request.get_full_path|slice:":-7" }}&page={{ page_obj.previous_page_number }}">previous</a>
               {% endif %}
               <span class="page-current">
                   Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
               </span>
               {% if page_obj.has_next %}
-                  <a href="{{ request.get_full_path|slice:":-7" }}&page={{ page_obj.next_page_number }}">next</a>
+                  <a class="btn btn-pg next" href="{{ request.get_full_path|slice:":-7" }}&page={{ page_obj.next_page_number }}">next</a>
               {% endif %}
           </span>
       </div>
   {% endif %}
-
 
 {% endblock %}

@@ -135,7 +135,9 @@ class PunchList(ListView):
 
         print self.request.GET.get('end_date')
         if self.request.GET.get('end_date'):
-            get_punches = get_punches.filter(time_out__lte = self.request.GET.get('end_date'))
+            d = datetime.datetime.strptime(self.request.GET.get("end_date"), "%Y-%m-%d")
+            d = d + datetime.timedelta(days = 1)
+            get_punches = get_punches.filter(time_in__lte = d)
 
         return get_punches.order_by('-time_in')
 

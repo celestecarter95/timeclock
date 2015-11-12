@@ -1,10 +1,150 @@
 /*
+  white
   background-color: rgba(252, 255, 245, 1.0);
+  very light blue
   background-color: rgba(209, 220, 188, 1.0);
+  light blue
   background-color: rgba(144, 170, 157, 1.0);
+  dark blue
   background-color: rgba(61, 96, 112, 1.0);
+  very dark blue
   background-color: rgba(24, 52, 66, 1.0);
 */
 body {
   background-color: rgba(252, 255, 245, 1.0);
+  color: rgba(61, 96, 112, 1.0);
+  font-size: 16px;
+  font-family: 'Vollkorn', serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.clockinout {
+  text-align: center;
+}
+
+.navbar-default {
+  background-color: rgba(144, 170, 157, 1.0);
+  background-color: rgba(209, 220, 188, 1.0);
+  color: rgba(24, 52, 66, 1.0);
+  margin-top: 50px;
+}
+
+.navbar-nav {
+  margin-left: 180px;
+}
+
+.navbar-default .navbar-brand {
+  color: rgba(24, 52, 66, 1.0);
+}
+
+.navbar-brand {
+  z-index: 1;
+  font-weight: 700;
+  font-size: 40px;
+  font-family: 'Allura', cursive;
+  position: absolute;
+  left: 70px;
+}
+
+.clock-brand {
+}
+
+.timer-img {
+  position: absolute;
+  left: 15px;
+  top: -47px;
+  width: 120px;
+}
+
+.btn-default {
+  background-color: rgba(61, 96, 112, 1.0);
+  color: rgba(252, 255, 245, 1.0);
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  background-color: rgba(24, 52, 66, 1.0);
+  color: rgba(252, 255, 245, 1.0);
+}
+
+h1 {
+  font-family: 'Allura', cursive;
+  font-size: 60px;
+  margin-bottom: 0;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.timer label {
+  margin: 0;
+  font-size: 30px;
+  font-family: 'Allura', cursive;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table>tbody>tr>td {
+  font-size: 13px;
+}
+
+thead {
+  font-size: 20px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: rgba(61, 96, 112, 0.3);
+}
+
+hr {
+  border-bottom: 2px solid rgba(61, 96, 112, 1.0);
+  clear: both;
+}
+
+#total {
+  border-top: 2px solid rgba(24, 52, 66, 1.0);
+  font-size: 18px;
+  text-align: right;
+  padding-top: 8px;
+  padding-right: 45px;
+}
+
+.btn-pg {
+  background-color: rgba(209, 220, 188, 1.0);
+  color: rgba(24, 52, 66, 1.0);
+}
+
+.next {
+  float: right;
+}
+
+.previous {
+  float: left;
+}
+
+.collapse {
+  height: 35px;
+}
+
+select {
+  z-index = 1;
+}
+
+.pagination {
+  width: 100%;
+}
+
+footer {
+  background-color: rgba(144, 170, 157, 1.0);
+  color: rgba(24, 52, 66, 1.0);
+  padding-top: 10px;
 }

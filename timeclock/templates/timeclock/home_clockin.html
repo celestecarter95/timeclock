@@ -4,11 +4,13 @@
 
 {% block content %}
 
-<h1>Clock In</h1>
-<form action="." method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button class="btn btn-default">Clock In!</button>
-</form>
+<div class="clockinout">
+  <h1>Clock In</h1>
+  <form action="." method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-default">Clock In!</button>
+  </form>
+</div>
 
 {% endblock %}
